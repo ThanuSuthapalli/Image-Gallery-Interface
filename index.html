@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Manipulation Interface</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- App Header -->
+        <div class="app-header">
+            <div class="app-title">
+                <i class="fas fa-images"></i>
+                <span>Image Gallery Interface</span>
+            </div>
+            <div class="view-toggle">
+                <button class="toggle-btn active" data-view="slideshow">
+                    <i class="fas fa-play"></i>
+                    Slideshow
+                </button>
+                <button class="toggle-btn" data-view="gallery">
+                    <i class="fas fa-th"></i>
+                    Gallery
+                </button>
+            </div>
+        </div>
+
+        <!-- Slideshow Interface -->
+        <div id="slideshow-view" class="view-container active">
+            <div class="slideshow-interface">
+                <!-- Main Slideshow Display -->
+                <div class="slideshow-display">
+                    <div class="slide active" data-slide="0" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');">
+                        <div class="slide-overlay">
+                            <h3>Mountain Vista</h3>
+                            <p>Breathtaking alpine landscape with dramatic peaks</p>
+                            <span class="slide-category">Nature</span>
+                        </div>
+                    </div>
+
+                    <div class="slide" data-slide="1" style="background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');">
+                        <div class="slide-overlay">
+                            <h3>Forest Path</h3>
+                            <p>Serene woodland trail through ancient trees</p>
+                            <span class="slide-category">Nature</span>
+                        </div>
+                    </div>
+
+                    <div class="slide" data-slide="2" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');">
+                        <div class="slide-overlay">
+                            <h3>Ocean Waves</h3>
+                            <p>Crystal clear waters meeting pristine shores</p>
+                            <span class="slide-category">Ocean</span>
+                        </div>
+                    </div>
+
+                    <div class="slide" data-slide="3" style="background-image: url('https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');">
+                        <div class="slide-overlay">
+                            <h3>Desert Sunset</h3>
+                            <p>Golden hour magic across endless dunes</p>
+                            <span class="slide-category">Desert</span>
+                        </div>
+                    </div>
+
+                    <div class="slide" data-slide="4" style="background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');">
+                        <div class="slide-overlay">
+                            <h3>Lake Reflection</h3>
+                            <p>Perfect mirror reflections on still waters</p>
+                            <span class="slide-category">Lake</span>
+                        </div>
+                    </div>
+
+                    <!-- Slideshow Controls -->
+                    <div class="slideshow-controls">
+                        <button class="control-btn prev" onclick="changeSlide(-1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="control-btn next" onclick="changeSlide(1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Progress Indicators -->
+                    <div class="slide-indicators">
+                        <button class="indicator active" onclick="goToSlide(0)"></button>
+                        <button class="indicator" onclick="goToSlide(1)"></button>
+                        <button class="indicator" onclick="goToSlide(2)"></button>
+                        <button class="indicator" onclick="goToSlide(3)"></button>
+                        <button class="indicator" onclick="goToSlide(4)"></button>
+                    </div>
+                </div>
+
+                <!-- Slideshow Settings Panel -->
+                <div class="settings-panel">
+                    <div class="setting-item">
+                        <label>Auto-play</label>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="autoplay" checked>
+                            <span class="slider"></span>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <label>Speed</label>
+                        <div class="speed-control">
+                            <button class="speed-btn" data-speed="3000">Fast</button>
+                            <button class="speed-btn active" data-speed="5000">Normal</button>
+                            <button class="speed-btn" data-speed="8000">Slow</button>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <label>Effect</label>
+                        <select class="effect-selector">
+                            <option value="fade">Fade</option>
+                            <option value="slide">Slide</option>
+                            <option value="zoom">Zoom</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery Interface -->
+        <div id="gallery-view" class="view-container">
+            <div class="gallery-interface">
+                <!-- Main Display Area -->
+                <div class="main-display">
+                    <div class="main-image-container">
+                        <img id="mainImage" src="https://images.unsplash.com/photo-1682687982501-1e58ab814714?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Selected Image" class="main-image">
+                        <div class="image-info">
+                            <h3 id="imageTitle">Modern Architecture</h3>
+                            <p id="imageDesc">Contemporary building design with geometric patterns</p>
+                            <div class="image-meta">
+                                <span id="imageCategory">Architecture</span>
+                                <span id="imageDate">2025</span>
+                            </div>
+                        </div>
+                        <button class="fullscreen-btn" onclick="toggleFullscreen()">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Thumbnail Strip -->
+                <div class="thumbnail-strip">
+                    <div class="thumbnail-container">
+                        <div class="thumbnail active" onclick="selectImage(this, 'https://images.unsplash.com/photo-1682687982501-1e58ab814714?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Modern Architecture', 'Contemporary building design with geometric patterns', 'Architecture', '2025')">
+                            <img src="https://images.unsplash.com/photo-1682687982501-1e58ab814714?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Architecture">
+                            <div class="thumbnail-overlay">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail" onclick="selectImage(this, 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Portrait Studio', 'Professional portrait photography session', 'Portrait', '2025')">
+                            <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Portrait">
+                            <div class="thumbnail-overlay">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail" onclick="selectImage(this, 'https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Street Scene', 'Urban life captured in candid moments', 'Street', '2025')">
+                            <img src="https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Street">
+                            <div class="thumbnail-overlay">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail" onclick="selectImage(this, 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Landscape Vista', 'Panoramic mountain and valley views', 'Landscape', '2025')">
+                            <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Landscape">
+                            <div class="thumbnail-overlay">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail" onclick="selectImage(this, 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Abstract Art', 'Creative color composition and forms', 'Abstract', '2025')">
+                            <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Abstract">
+                            <div class="thumbnail-overlay">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail" onclick="selectImage(this, 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Product Shot', 'Commercial photography showcase', 'Commercial', '2025')">
+                            <img src="https://images.unsplash.com/photo-1547036967-23d11aacaee0?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Product">
+                            <div class="thumbnail-overlay">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail" onclick="selectImage(this, 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Event Coverage', 'Dynamic event and celebration moments', 'Events', '2025')">
+                            <img src="https://images.unsplash.com/photo-1519904981063-b0cf448d479e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Event">
+                            <div class="thumbnail-overlay">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail" onclick="selectImage(this, 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Color Study', 'Vibrant hues and artistic composition', 'Art', '2025')">
+                            <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Color">
+                            <div class="thumbnail-overlay">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Controls -->
+                <div class="gallery-controls">
+                    <div class="navigation-arrows">
+                        <button class="nav-arrow prev" onclick="previousImage()">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="nav-arrow next" onclick="nextImage()">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="zoom-controls">
+                        <button class="zoom-btn" onclick="zoomOut()">
+                            <i class="fas fa-search-minus"></i>
+                        </button>
+                        <button class="zoom-btn" onclick="resetZoom()">
+                            <i class="fas fa-compress"></i>
+                        </button>
+                        <button class="zoom-btn" onclick="zoomIn()">
+                            <i class="fas fa-search-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fullscreen Modal -->
+        <div id="fullscreenModal" class="fullscreen-modal">
+            <div class="fullscreen-content">
+                <button class="close-fullscreen" onclick="toggleFullscreen()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <img id="fullscreenImage" src="" alt="Fullscreen Image">
+                <div class="fullscreen-info">
+                    <h3 id="fullscreenTitle"></h3>
+                    <p id="fullscreenDesc"></p>
+                </div>
+                <div class="fullscreen-nav">
+                    <button class="fs-nav prev" onclick="fullscreenPrev()">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="fs-nav next" onclick="fullscreenNext()">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div class="loading-indicator" id="loadingIndicator">
+            <div class="spinner"></div>
+            <span>Loading...</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
